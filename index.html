@@ -165,7 +165,7 @@ function sendRs(s,a){var c=(child||"").trim(),el=$("rs_"+s.id),ans=a==="y"?"Part
  function fail(x){var e2=$("rs_"+s.id);if(e2)e2.textContent=/claude|anthropic/i.test(location.hostname)?"Confirmarea funcționează doar pe site-ul publicat, nu în această previzualizare.":"Nu s-a putut trimite"+(typeof x==="number"?" (eroare "+x+")":"")+". Încearcă din nou mai târziu."}
  if(GF.u){var p=new URLSearchParams();p.set(GF.l,stitle(s));p.set(GF.d,dt);p.set(GF.c,c);p.set(GF.a,ans);
   fetch(GF.u,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:p.toString()}).then(function(){ok()}).catch(fail)}
- else{fetch(location.pathname,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"rsvp",session:s.id,lesson:stitle(s),date:dt,child:c,answer:ans}).toString()}).then(function(r){if(!r.ok)throw r.status;ok()}).catch(fail)}}
+ else{fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"rsvp",session:s.id,lesson:stitle(s),date:dt,child:c,answer:ans}).toString()}).then(function(r){if(!r.ok)throw r.status;ok()}).catch(fail)}}
 function schClick(e){var t=e.target,d=t.dataset||{};
  if(d.ry||d.rn){var id=d.ry||d.rn,s0=sched.filter(function(z){return z.id===id})[0];if(s0)sendRs(s0,d.ry?"y":"n");return}
  if(!owner)return;
